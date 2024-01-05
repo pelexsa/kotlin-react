@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "POST_CATEGORY")
-data class PostCategory(
+class PostCategory(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val categoryId: Long? = 0L,
 
@@ -36,6 +36,6 @@ data class PostCategory(
         var modifiedDate: LocalDateTime? = null,
 
         @OneToMany(mappedBy = "category")
-        var posts: List<Post> = mutableListOf()
+        var posts: MutableList<Post> = mutableListOf()
 
 )
