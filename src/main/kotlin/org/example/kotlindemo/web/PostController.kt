@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.net.HttpURLConnection
 
 @RestController
 @RequestMapping("/post")
@@ -22,20 +21,25 @@ class PostController(private val postService: PostService) {
     }
 
     @PostMapping("/insertCategory")
-    fun insertCategory(@RequestBody param: PostCategory): ResponseEntity<Map<String, Any>> {
+    fun insertCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
         val postCategory = PostCategory(
                 name = param.name,
                 description = param.description,
                 createdUser = "admin"
         )
 
-        postService.insertCategory(postCategory);
+        postService.insertCategory(postCategory)
+        return ApiResponse.ok()
+    }
 
-        val response = mapOf(
-                "code" to HttpURLConnection.HTTP_OK,
-                "message" to "Success",
-        )
-        return ResponseEntity.ok(response)
+    @PostMapping("/updateCategory")
+    fun updateCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
+        return ApiResponse.ok()
+    }
+
+    @PostMapping("/deleteCategory")
+    fun deleteCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
+        return ApiResponse.ok()
     }
 
 
