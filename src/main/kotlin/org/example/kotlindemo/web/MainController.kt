@@ -14,9 +14,4 @@ class MainController {
         return "index"
     }
 
-    @GetMapping("/post")
-    fun post(): String{
-        return "/post/index"
-    }
-
 }

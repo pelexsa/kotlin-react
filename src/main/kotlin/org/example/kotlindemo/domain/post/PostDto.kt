@@ -1,4 +1,4 @@
-package org.example.kotlindemo.domain
+package org.example.kotlindemo.domain.post
 
 import java.time.LocalDateTime
 

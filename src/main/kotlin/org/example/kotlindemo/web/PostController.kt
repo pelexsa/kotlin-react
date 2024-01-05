@@ -1,45 +1,41 @@
 package org.example.kotlindemo.web
 
-import org.example.kotlindemo.domain.Post
+import org.example.kotlindemo.domain.post.PostCategory
+import org.example.kotlindemo.domain.result.ApiResponse
 import org.example.kotlindemo.service.PostService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.HttpURLConnection
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/post")
 class PostController(private val postService: PostService) {
 
     @GetMapping
-    fun findPostsAndCategories(): ResponseEntity<Map<String, Any>> {
+    fun findPostsAndCategories(): ResponseEntity<ApiResponse> {
         val postsAndCategories = postService.findPostsAndCategories()
-
-        val response = mapOf(
-            "code" to HttpURLConnection.HTTP_OK,
-            "message" to "Success",
-            "data" to mapOf("post" to postsAndCategories)
-        )
-
-        return ResponseEntity.ok(response)
+        return ApiResponse.ok(mapOf("post" to postsAndCategories))
     }
 
-//    @PostMapping
-//    fun findPosts2(): ResponseEntity<Map<String, Any>>{
-//        val response = mapOf(
-//            "code" to "code",
-//            "message" to "Success",
-//            "data" to "data"
-//        )
-//        return ResponseEntity.ok(response)
-//    }
+    @PostMapping("/insertCategory")
+    fun insertCategory(@RequestBody param: PostCategory): ResponseEntity<Map<String, Any>> {
+        val postCategory = PostCategory(
+                name = param.name,
+                description = param.description,
+                createdUser = "admin"
+        )
 
-    @PostMapping("/insert-info")
-    fun insertPostInfo(post: Post) {
+        postService.insertCategory(postCategory);
 
-
+        val response = mapOf(
+                "code" to HttpURLConnection.HTTP_OK,
+                "message" to "Success",
+        )
+        return ResponseEntity.ok(response)
     }
 
 

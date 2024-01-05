@@ -1,4 +1,4 @@
-package org.example.kotlindemo.domain
+package org.example.kotlindemo.domain.post
 
 import jakarta.persistence.*
 import org.hibernate.annotations.ColumnDefault
@@ -21,7 +21,7 @@ data class PostCategory(
         var delYn: String = "N",
 
         @Column(name = "SORT", nullable = false)
-        var sort: Int,
+        var sort: Int = 0,
 
         @Column(name = "CREATED_USER", nullable = false, length = 45)
         var createdUser: String,
@@ -36,6 +36,6 @@ data class PostCategory(
         var modifiedDate: LocalDateTime? = null,
 
         @OneToMany(mappedBy = "category")
-        var posts: List<Post>
+        var posts: List<Post> = mutableListOf()
 
 )
