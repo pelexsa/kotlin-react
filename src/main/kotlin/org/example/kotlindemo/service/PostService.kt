@@ -19,4 +19,12 @@ class PostService(private val postRepository: PostRepository,
         postCategoryRepository.save(postCategory)
     }
 
+    fun updateCategory(postCategory: PostCategory){
+        postCategoryRepository.save(postCategory)
+    }
+
+    fun deleteCategory(categoryId: Long){
+        postCategoryRepository.deleteById(categoryId)
+    }
+
 }

@@ -4,10 +4,13 @@ import org.example.kotlindemo.domain.post.PostCategory
 import org.example.kotlindemo.domain.result.ApiResponse
 import org.example.kotlindemo.service.PostService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -23,22 +26,24 @@ class PostController(private val postService: PostService) {
     @PostMapping("/insertCategory")
     fun insertCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
         val postCategory = PostCategory(
-                name = param.name,
-                description = param.description,
-                createdUser = "admin"
+            name = param.name,
+            description = param.description,
+            createdUser = "admin"
         )
 
         postService.insertCategory(postCategory)
         return ApiResponse.ok()
     }
 
-    @PostMapping("/updateCategory")
+    @PutMapping("/updateCategory")
     fun updateCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
+        //postService.updateCategory(postCategory)
         return ApiResponse.ok()
     }
 
-    @PostMapping("/deleteCategory")
-    fun deleteCategory(@RequestBody param: PostCategory): ResponseEntity<ApiResponse> {
+    @DeleteMapping("/deleteCategory")
+    fun deleteCategory(@RequestParam categoryId: Long): ResponseEntity<ApiResponse> {
+        postService.deleteCategory(categoryId)
         return ApiResponse.ok()
     }
 
