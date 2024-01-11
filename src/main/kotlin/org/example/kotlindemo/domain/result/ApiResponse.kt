@@ -4,18 +4,15 @@ import org.springframework.http.ResponseEntity
 import java.net.HttpURLConnection
 
 data class ApiResponse<T>(
-        var code: Int,
-        var message: String,
-        var data: T? = null
+    val code: Int,
+    val message: String,
+    val data: T?
 ){
     companion object {
-        fun ok(data: Any? = null) = ResponseEntity.ok(
-            ApiResponse(
-                code = HttpURLConnection.HTTP_OK,
-                message = "Success",
-                data = data
+        fun ok(data: Any? = null): ResponseEntity<ApiResponse<Any>> {
+            return ResponseEntity.ok(
+                ApiResponse(HttpURLConnection.HTTP_OK, "Success", data)
             )
-        )
+        }
     }
-
 }

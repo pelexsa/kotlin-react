@@ -1,7 +1,6 @@
 package org.example.kotlindemo.web
 
 import org.example.kotlindemo.domain.post.PostCategory
-import org.example.kotlindemo.domain.post.PostDto
 import org.example.kotlindemo.domain.result.ApiResponse
 import org.example.kotlindemo.service.PostService
 import org.springframework.http.ResponseEntity
@@ -20,8 +19,8 @@ class PostController(private val postService: PostService) {
 
     @GetMapping
     fun findPostsAndCategories(): ResponseEntity<ApiResponse<Any>> {
-        val response = mapOf("post" to postService.findPostsAndCategories())
-        return ApiResponse.ok(response)
+        val posts = postService.findPostsAndCategories()
+        return ApiResponse.ok(posts)
     }
 
     @PostMapping("/insertCategory")
