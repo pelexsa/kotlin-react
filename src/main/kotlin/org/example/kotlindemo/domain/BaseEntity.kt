@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 open class BaseEntity : Serializable {
 
     @CreatedBy
-    val createdUser: String = ""
+    val createdUser: String? = null
 
     @CreatedDate
     val createdDate: LocalDateTime = LocalDateTime.now()
@@ -24,5 +24,5 @@ open class BaseEntity : Serializable {
     val modifiedUser: String? = null
 
     @LastModifiedDate
-    val modifiedDate: LocalDateTime = LocalDateTime.now()
+    val modifiedDate: LocalDateTime? = null
 }
