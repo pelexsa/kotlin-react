@@ -1,12 +1,12 @@
 package org.example.kotlindemo.domain.post
 
 import jakarta.persistence.*
+import org.example.kotlindemo.domain.BaseEntity
 import org.hibernate.annotations.ColumnDefault
-import java.time.LocalDateTime
 
 @Entity
 @Table(name = "POST")
-class Post(
+class Post (
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val postId: Long = 0L,
 
@@ -29,18 +29,6 @@ class Post(
         var delYn: String = "N",
 
         @Column(name = "SORT", nullable = false)
-        var sort: Int,
+        var sort: Int
 
-        @Column(name = "CREATED_USER", nullable = false, length = 45)
-        var createdUser: String,
-
-        @Column(name = "CREATED_DATE", nullable = false)
-        var createdDate: LocalDateTime = LocalDateTime.now(),
-
-        @Column(name = "MODIFIED_USER", length = 45)
-        var modifiedUser: String? = null,
-
-        @Column(name = "MODIFIED_DATE")
-        var modifiedDate: LocalDateTime? = null
-
-)
+): BaseEntity ()

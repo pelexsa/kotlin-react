@@ -1,8 +1,8 @@
 package org.example.kotlindemo.domain.post
 
 import jakarta.persistence.*
+import org.example.kotlindemo.domain.BaseEntity
 import org.hibernate.annotations.ColumnDefault
-import java.time.LocalDateTime
 
 @Entity
 @Table(name = "POST_CATEGORY")
@@ -23,22 +23,10 @@ class PostCategory(
     @Column(name = "SORT", nullable = false)
     var sort: Int = 0,
 
-    @Column(name = "CREATED_USER", nullable = false, length = 45)
-    var createdUser: String,
-
-    @Column(name = "CREATED_DATE", nullable = false)
-    var createdDate: LocalDateTime = LocalDateTime.now(),
-
-    @Column(name = "MODIFIED_USER", length = 45)
-    var modifiedUser: String? = null,
-
-    @Column(name = "MODIFIED_DATE")
-    var modifiedDate: LocalDateTime? = null,
-
     @OneToMany(mappedBy = "category")
     var posts: MutableList<Post> = mutableListOf()
 
-) {
+) : BaseEntity() {
     override fun toString(): String {
         return "PostCategory(categoryId=$categoryId, name=$name, description=$description, sort=$sort)"
     }
